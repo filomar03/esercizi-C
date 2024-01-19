@@ -81,6 +81,8 @@ Hotel * incubo(const char * filename) {
         i++;
     }
 
+    fclose(stream);
+
     return cloneHotel(&hotels[ni]);
 }
 
