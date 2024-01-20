@@ -66,10 +66,35 @@ Lista partiziona(int *a, int n, int y, Lista *lista) {
     return *lista;
 }
 
-int main() {
-    int a[] = {2, 8, 0, 3, 9, 6, 1, 3};
+#define N 8
+
+int leggiArray(const char * nomeFile, int * destinazione) {
+    FILE * stream = fopen(nomeFile, "r");
+
+    int i = 0;
+    while (!feof(stream) && i < N) {
+        int n;
+        fscanf(stream, "%d ", &n);
+        destinazione[i] = n;
+        i++;
+    }
+
+    return i;
+
+    fclose(stream);
+}
+
+
+int main(int argc, const char * argv[]) {
+    int a[N];
+
+    int numeri = leggiArray(argv[1], a);
+
+    for (int i = 0; i < N; i++) {
+        printf("%d ", a[i]);
+    }
 
     Lista lista = NULL;
 
-    stampa(partiziona(a, sizeof(a) / sizeof(a[0]), 10, &lista));
+    stampa(partiziona(a, numeri, atoi(argv[2]), &lista));
 }
